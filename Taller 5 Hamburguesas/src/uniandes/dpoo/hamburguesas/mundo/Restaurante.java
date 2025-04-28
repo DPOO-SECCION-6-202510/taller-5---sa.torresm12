@@ -21,7 +21,7 @@ public class Restaurante
     /**
      * La ruta a la carpeta donde se almacenan las facturas
      */
-    private static final String CARPETA_FACTURAS = "./facturas/";
+    public static String CARPETA_FACTURAS = "./facturas/";
 
     /**
      * La primera parte del nombre de los archivos de facturas
@@ -103,6 +103,7 @@ public class Restaurante
 
         String nombreArchivo = PREFIJO_FACTURAS + pedidoEnCurso.getIdPedido( ) + ".txt";
         pedidoEnCurso.guardarFactura( new File( CARPETA_FACTURAS + nombreArchivo ) );
+        pedidos.add(pedidoEnCurso);
         pedidoEnCurso = null;
     }
 
@@ -172,7 +173,7 @@ public class Restaurante
         cargarCombos( archivoCombos );
     }
 
-    private void cargarIngredientes( File archivoIngredientes ) throws IngredienteRepetidoException, IOException
+    public void cargarIngredientes( File archivoIngredientes ) throws IngredienteRepetidoException, IOException
     {
         BufferedReader reader = new BufferedReader( new java.io.FileReader( archivoIngredientes ) );
         try
@@ -209,7 +210,7 @@ public class Restaurante
         }
     }
 
-    private void cargarMenu( File archivoMenu ) throws ProductoRepetidoException, IOException
+    public void cargarMenu( File archivoMenu ) throws ProductoRepetidoException, IOException
     {
         BufferedReader reader = new BufferedReader( new java.io.FileReader( archivoMenu ) );
         try
@@ -246,7 +247,7 @@ public class Restaurante
         }
     }
 
-    private void cargarCombos( File archivoCombos ) throws ProductoRepetidoException, ProductoFaltanteException, IOException
+    public void cargarCombos( File archivoCombos ) throws ProductoRepetidoException, ProductoFaltanteException, IOException
     {
         BufferedReader reader = new BufferedReader( new java.io.FileReader( archivoCombos ) );
         try

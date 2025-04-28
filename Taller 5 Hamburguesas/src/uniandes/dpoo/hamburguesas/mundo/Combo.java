@@ -40,6 +40,15 @@ public class Combo implements Producto
     {
         return nombreCombo;
     }
+    
+    public ArrayList<ProductoMenu> getItemsCombo(){
+    	return itemsCombo;
+    }
+    
+	public double getDescuento() {
+		return descuento;
+	}
+
 
     /**
      * Retorna el precio del combo.
@@ -54,8 +63,10 @@ public class Combo implements Producto
         {
             precio += i.getPrecio( );
         }
-
-        return ( int ) ( precio * descuento );
+        int desc =  (int) (precio * descuento);
+        precio -= desc;
+        
+        return (int) precio;
     }
 
     /**
@@ -69,7 +80,7 @@ public class Combo implements Producto
         StringBuffer sb = new StringBuffer( );
         sb.append( "Combo " + nombreCombo + "\n" );
         sb.append( " Descuento: " + descuento + "\n" );
-        sb.append( "            " + getPrecio( ) + "\n" );
+        sb.append( " Costo final: " + getPrecio( ) + "\n" );
 
         return sb.toString( );
     }

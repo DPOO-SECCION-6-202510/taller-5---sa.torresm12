@@ -38,21 +38,41 @@ public class ProductoAjustado implements Producto
     {
         return productoBase.getNombre( );
     }
-
+    
     /**
      * Retorna el precio del producto ajustado, que debe ser igual al del producto base, sumándole el precio de los ingredientes adicionales.
      */
     @Override
     public int getPrecio( )
     {
-        return 0;
+    	int totalAdicional = 0;
+    	for(int i = 0; i < agregados.size(); i++) {
+    		Ingrediente ingrediente = agregados.get(i);
+    		totalAdicional += ingrediente.getCostoAdicional();
+    	}
+    	int total = productoBase.getPrecio() + totalAdicional;
+        return total;
     }
+    
+    public ArrayList<Ingrediente> getAgregados() {
+		return agregados;
+	}
+	
+	
+	public ArrayList<Ingrediente> getEliminados() {
+		return eliminados;
+	}
+	
+	public ProductoMenu getProductoBase() {
+		return productoBase;	
+	}
 
     /**
      * Genera el texto que debe aparecer en la factura.
      * 
      * El texto incluye el producto base, los ingredientes adicionales con su costo, los ingredientes eliminados, y el precio total
      */
+	
     @Override
     public String generarTextoFactura( )
     {
@@ -60,17 +80,16 @@ public class ProductoAjustado implements Producto
         sb.append( productoBase );
         for( Ingrediente ing : agregados )
         {
-            sb.append( "    +" + ing.getNombre( ) );
-            sb.append( "                " + ing.getCostoAdicional( ) );
+            sb.append( "Nombre agregado: " + ing.getNombre( ) );
+            sb.append( "Precio adicional: " + ing.getCostoAdicional( ) );
         }
         for( Ingrediente ing : eliminados )
         {
-            sb.append( "    -" + ing.getNombre( ) );
+            sb.append( "Nombre eliminado: " + ing.getNombre( ) );
         }
 
-        sb.append( "            " + getPrecio( ) + "\n" );
+        sb.append( "Total: " + getPrecio( ) + "\n" );
 
         return sb.toString( );
     }
-
 }

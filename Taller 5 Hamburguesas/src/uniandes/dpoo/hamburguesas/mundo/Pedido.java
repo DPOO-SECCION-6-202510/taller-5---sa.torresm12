@@ -18,7 +18,7 @@ public class Pedido
     /**
      * El número de pedidos que se han creado hasta el momento
      */
-    private static int numeroPedidos;
+    public static int numeroPedidos = 0;
 
     /**
      * El número identificador de un pedido
@@ -49,7 +49,8 @@ public class Pedido
      */
     public Pedido( String nombreCliente, String direccionCliente )
     {
-        this.idPedido = numeroPedidos++;
+        this.idPedido = numeroPedidos + 1;
+        Pedido.numeroPedidos += 1;
         this.nombreCliente = nombreCliente;
         this.direccionCliente = direccionCliente;
         productos = new ArrayList<Producto>( );
@@ -71,6 +72,11 @@ public class Pedido
     public String getNombreCliente( )
     {
         return nombreCliente;
+    }
+    
+    public  ArrayList<Producto> getProductos( )
+    {
+        return productos;
     }
 
     /**
@@ -157,11 +163,9 @@ public class Pedido
     public void guardarFactura( File archivo ) throws FileNotFoundException
     {
         String factura = generarTextoFactura( );
-
         PrintWriter out;
         out = new PrintWriter( archivo );
         out.print( factura );
         out.close( );
     }
-
 }
